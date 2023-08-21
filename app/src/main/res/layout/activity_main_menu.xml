@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="Activities.MainMenu" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMainMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMainMenuRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/buttonMainReadTag"
+                    style="?android:attr/buttonStyleSmall"
+                    android:backgroundTint="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:onClick="onShowReadTag"
+                    android:text="@string/action_read_tag" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMainMenuRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/buttonMainInfoTag"
+                    android:backgroundTint="@color/blue"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="onShowInfoTag"
+                    android:text="@string/action_info_tag"
+                    android:layout_weight="0.5" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayoutMainMenuRow3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/buttonMainWriteTag"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="onShowWriteTag"
+                    android:text="@string/action_write_tag" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayoutMainMenuRow4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="onShowTulisTag"
+                    android:text="@string/title_activity_tulis_tag"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewMainFooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="1dp"
+        android:paddingRight="14dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

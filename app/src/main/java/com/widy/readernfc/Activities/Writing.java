@@ -22,11 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.widy.readernfc.R;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class TulisTag extends Activity {
+public class Writing extends Activity {
     public static final String Error_Detected = "No NFC TAG Detected";
     public static final String Write_Success = "Text Written Successfully!";
     public static final String Write_Error = "Error during writing, Try Again!";

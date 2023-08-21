@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.widy.readernfc">
+
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <application
+        android:name=".Common"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activities.Writing"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.InfoTag"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainMenu"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name=".MainMenuAlias"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
+            android:targetActivity=".Activities.MainMenu">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity-alias>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider> <!-- Other Activities -->
+        <activity
+            android:name=".Activities.KeyMapCreator"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_create_key_map" />
+        <activity
+            android:name=".Activities.DumpEditor"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_dump_editor" />
+        <activity
+            android:name=".Activities.FileChooser"
+            android:label="@string/title_activity_file_chooser"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Activities.ReadTag"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_read_tag" />
+        <activity
+            android:name=".Activities.HexToAscii"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_hex_to_ascii" />
+        <activity
+            android:name=".Activities.WriteTag"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_write_tag" />
+        <activity
+            android:name=".Activities.TagInfoTool"
+            android:configChanges="orientation|screenSize" />
+    </application>
+
+</manifest>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menuDumpEditorAscii"
+        android:title="@string/action_data_as_ascii" />
+    <item android:id="@+id/menuDumpEditorSaveKeys"
+          android:title="@string/action_save_keys" />
+
+</menu>
