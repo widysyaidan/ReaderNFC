@@ -468,6 +468,5 @@ public class MainMenu extends Activity {
         } catch(IOException e) {
             Log.e(LOG_TAG, "Error while copying 'extended-std.keys' " + "from assets to internal storage.");
         }
-
     }
 }
