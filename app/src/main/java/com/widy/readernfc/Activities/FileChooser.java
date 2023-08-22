@@ -25,22 +25,14 @@ import java.io.File;
 import java.util.Arrays;
 
 public class FileChooser extends BasicActivity{
-    public final static String EXTRA_DIR =
-            "com.widy.readernfc.Activity.FileChooser.DIR";
-    public final static String EXTRA_TITLE =
-            "com.widy.readernfc.Activity.FileChooser.TITLE";
-    public final static String EXTRA_CHOOSER_TEXT =
-            "com.widy.readernfc.Activity.FileChooser.CHOOSER_TEXT";
-    public final static String EXTRA_BUTTON_TEXT =
-            "com.widy.readernfc.Activity.FileChooser.BUTTON_TEXT";
-    public final static String EXTRA_ALLOW_NEW_FILE =
-            "com.widy.readernfc.Activity.FileChooser.ALLOW_NEW_FILE";
-    public final static String EXTRA_CHOSEN_FILE =
-            "com.widy.readernfc.Activity.CHOSEN_FILE";
-    public final static String EXTRA_CHOSEN_FILENAME =
-            "com.widy.readernfc.Activity.EXTRA_CHOSEN_FILENAME";
-    private static final String LOG_TAG =
-            FileChooser.class.getSimpleName();
+    public final static String EXTRA_DIR = "com.widy.readernfc.Activity.FileChooser.DIR";
+    public final static String EXTRA_TITLE = "com.widy.readernfc.Activity.FileChooser.TITLE";
+    public final static String EXTRA_CHOOSER_TEXT = "com.widy.readernfc.Activity.FileChooser.CHOOSER_TEXT";
+    public final static String EXTRA_BUTTON_TEXT = "com.widy.readernfc.Activity.FileChooser.BUTTON_TEXT";
+    public final static String EXTRA_ALLOW_NEW_FILE = "com.widy.readernfc.Activity.FileChooser.ALLOW_NEW_FILE";
+    public final static String EXTRA_CHOSEN_FILE = "com.widy.readernfc.Activity.CHOSEN_FILE";
+    public final static String EXTRA_CHOSEN_FILENAME = "com.widy.readernfc.Activity.EXTRA_CHOSEN_FILENAME";
+    private static final String LOG_TAG = FileChooser.class.getSimpleName();
     private RadioGroup mGroupOfFiles;
     private Button mChooserButton;
     private TextView mChooserText;
@@ -59,7 +51,6 @@ public class FileChooser extends BasicActivity{
     @Override
     public void onStart() {
         super.onStart();
-
         mChooserText = findViewById(R.id.textViewFileChooser);
         mChooserButton = findViewById(R.id.buttonFileChooserChoose);
         Intent intent = getIntent();
@@ -220,18 +211,14 @@ public class FileChooser extends BasicActivity{
                                 setResult(Activity.RESULT_OK, intent);
                                 finish();
                             } else {
-                                Toast.makeText(cont, R.string.info_invalid_file_name,
-                                        Toast.LENGTH_LONG).show();
+                                Toast.makeText(cont, R.string.info_invalid_file_name, Toast.LENGTH_LONG).show();
                             }
                         })
-                .setNegativeButton(R.string.action_cancel,
-                        (dialog, whichButton) -> {
-                        })
+                .setNegativeButton(R.string.action_cancel, (dialog, whichButton) -> {})
                 .show();
     }
     private void onDeleteFile() {
-        RadioButton selected = findViewById(
-                mGroupOfFiles.getCheckedRadioButtonId());
+        RadioButton selected = findViewById(mGroupOfFiles.getCheckedRadioButtonId());
         File file = new File(mDir.getPath(), selected.getText().toString());
         file.delete();
         mIsDirEmpty = updateFileIndex(mDir);

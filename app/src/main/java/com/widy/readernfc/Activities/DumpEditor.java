@@ -493,8 +493,7 @@ public class DumpEditor extends BasicActivity implements IActivityThatReactsToSa
         }
         File file = Common.getFile(Common.TMP_DIR + "/" + fileName);
         if (!Common.saveFile(file, mLines, false)) {
-            Toast.makeText(this, R.string.info_save_error,
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.info_save_error, Toast.LENGTH_LONG).show();
             return null;
         }
         return file;

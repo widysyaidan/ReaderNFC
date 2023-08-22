@@ -58,18 +58,14 @@ public class TagInfoTool extends BasicActivity{
         if (messageID == 0) {
             return;
         }
-        CharSequence styledText = HtmlCompat.fromHtml(
-                getString(messageID), HtmlCompat.FROM_HTML_MODE_LEGACY);
+        CharSequence styledText = HtmlCompat.fromHtml(getString(messageID), HtmlCompat.FROM_HTML_MODE_LEGACY);
         AlertDialog ad = new AlertDialog.Builder(this)
                 .setTitle(titleID)
                 .setMessage(styledText)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(R.string.action_ok,
-                        (dialog, which) -> {
-                        })
+                .setPositiveButton(R.string.action_ok, (dialog, which) -> {})
                 .show();
-        ((TextView)ad.findViewById(android.R.id.message)).setMovementMethod(
-                LinkMovementMethod.getInstance());
+        ((TextView)ad.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
     @SuppressLint("SetTextI18n")
     private void updateTagInfo(Tag tag) {
@@ -183,22 +179,18 @@ public class TagInfoTool extends BasicActivity{
             text.setText(getString(R.string.text_no_tag));
             mLayout.removeAllViews();
             mLayout.addView(text);
-            Toast.makeText(this, R.string.info_no_tag_found,
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.info_no_tag_found, Toast.LENGTH_SHORT).show();
         }
     }
     private int getTagIdentifier(String atqa, String sak, String ats) {
         String prefix = "tag_";
         ats = ats.replace("-", "");
-        int ret = getResources().getIdentifier(
-                prefix + atqa + sak + ats, "string", getPackageName());
+        int ret = getResources().getIdentifier(prefix + atqa + sak + ats, "string", getPackageName());
         if (ret == 0) {
-            ret = getResources().getIdentifier(
-                    prefix + atqa + sak, "string", getPackageName());
+            ret = getResources().getIdentifier(prefix + atqa + sak, "string", getPackageName());
         }
         if (ret == 0) {
-            ret = getResources().getIdentifier(
-                    prefix + atqa, "string", getPackageName());
+            ret = getResources().getIdentifier(prefix + atqa, "string", getPackageName());
         }
         if (ret == 0) {
             return R.string.tag_unknown;

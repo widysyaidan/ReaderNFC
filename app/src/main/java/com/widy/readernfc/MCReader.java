@@ -86,8 +86,7 @@ public class MCReader {
                 if (nfcaIdx == -1) {
                     nfcaIdx = i;
                 }
-                if (oldTechExtras[i] != null
-                        && oldTechExtras[i].containsKey("sak")) {
+                if (oldTechExtras[i] != null && oldTechExtras[i].containsKey("sak")) {
                     sak = (short) (sak
                             | oldTechExtras[i].getShort("sak"));
                     isFirstSak = nfcaIdx == i;
@@ -206,19 +205,16 @@ public class MCReader {
                 } catch (TagLostException e) {
                     throw e;
                 } catch (IOException e) {
-                    Log.d(LOG_TAG, "(Recoverable) Error while reading block "
-                            + i + " from tag.");
+                    Log.d(LOG_TAG, "(Recoverable) Error while reading block " + i + " from tag.");
                     blocks.add(NO_DATA);
                     if (!mMFC.isConnected()) {
-                        throw new TagLostException(
-                                "Tag removed during readSector(...)");
+                        throw new TagLostException("Tag removed during readSector(...)");
                     }
                     authenticate(sectorIndex, key, useAsKeyB);
                 }
             }
             ret = blocks.toArray(new String[0]);
             int last = ret.length -1;
-            // Validate if it was possible to read any data.
             boolean noData = true;
             for (String s : ret) {
                 if (!s.equals(NO_DATA)) {
@@ -239,15 +235,13 @@ public class MCReader {
                                 + ret[last].substring(12, 20) + NO_KEY;
                     }
                 } else {
-                    ret[last] = NO_KEY + ret[last].substring(12, 20)
-                            + Common.bytes2Hex(key);
+                    ret[last] = NO_KEY + ret[last].substring(12, 20) + Common.bytes2Hex(key);
                 }
             }
         }
         return ret;
     }
-    public int writeBlock(int sectorIndex, int blockIndex, byte[] data,
-                          byte[] key, boolean useAsKeyB) {
+    public int writeBlock(int sectorIndex, int blockIndex, byte[] data, byte[] key, boolean useAsKeyB) {
         if (getSectorCount()-1 < sectorIndex) {
             return 1;
         }
@@ -263,7 +257,6 @@ public class MCReader {
         // Write block.
         int block = mMFC.sectorToBlock(sectorIndex) + blockIndex;
         try {
-            // Normal write (also feasible for block 0 of gen2 cards).
             mMFC.writeBlock(block, data);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error while writing block to tag.", e);
@@ -297,8 +290,7 @@ public class MCReader {
         }
         return 0;
     }
-    public int writeValueBlock(int sectorIndex, int blockIndex, int value,
-                               boolean increment, byte[] key, boolean useAsKeyB) {
+    public int writeValueBlock(int sectorIndex, int blockIndex, int value, boolean increment, byte[] key, boolean useAsKeyB) {
         if (getSectorCount()-1 < sectorIndex) {
             return 1;
         }
@@ -324,7 +316,6 @@ public class MCReader {
         return 0;
     }
     public int buildNextKeyMapPart() {
-        // Clear status and key map before new walk through sectors.
         boolean error = false;
         if (mKeysWithOrder != null && mLastSector != -1) {
             if (mKeyMapStatus == mLastSector+1) {
@@ -332,13 +323,10 @@ public class MCReader {
                 mKeyMap = new SparseArray<>();
             }
             // Get auto reconnect setting.
-            boolean autoReconnect = Common.getPreferences().getBoolean(
-                    Preference.AutoReconnect.toString(), false);
+            boolean autoReconnect = Common.getPreferences().getBoolean(Preference.AutoReconnect.toString(), false);
             // Get retry authentication option.
-            boolean retryAuth = Common.getPreferences().getBoolean(
-                    Preference.UseRetryAuthentication.toString(), false);
-            int retryAuthCount = Common.getPreferences().getInt(
-                    Preference.RetryAuthenticationCount.toString(), 1);
+            boolean retryAuth = Common.getPreferences().getBoolean(Preference.UseRetryAuthentication.toString(), false);
+            int retryAuthCount = Common.getPreferences().getInt(Preference.RetryAuthenticationCount.toString(), 1);
             String[] keys = new String[2];
             boolean[] foundKeys = new boolean[] {false, false};
             boolean auth;
@@ -359,36 +347,29 @@ public class MCReader {
                             }
                         }
                         if (!foundKeys[1]) {
-                            auth = mMFC.authenticateSectorWithKeyB(
-                                    mKeyMapStatus, bytesKey);
+                            auth = mMFC.authenticateSectorWithKeyB(mKeyMapStatus, bytesKey);
                             if (auth) {
                                 keys[1] = key;
                                 foundKeys[1] = true;
                             }
                         }
                     } catch (Exception e) {
-                        Log.d(LOG_TAG,
-                                "Error while building next key map part");
+                        Log.d(LOG_TAG, "Error while building next key map part");
                         if (autoReconnect) {
-                            // Is the tag still in range?
                             if (isConnectedButTagLost()) {
                                 close();
                             }
                             while (!isConnected()) {
-                                // Sleep for 500ms.
                                 try {
                                     Thread.sleep(500);
                                 } catch (InterruptedException ex) {
-                                    // Do nothing.
                                 }
                                 // Try to reconnect.
                                 try {
                                     connect();
                                 } catch (Exception ex) {
-                                    // Do nothing.
                                 }
                             }
-                            // Repeat last loop (do not incr. j).
                             continue;
                         } else {
                             error = true;
@@ -396,7 +377,6 @@ public class MCReader {
                         }
                     }
                     if((foundKeys[0] && foundKeys[1]) || !retryAuth) {
-                        // Both keys found or no retry wanted. Stop retrying.
                         break;
                     }
                     j++;
@@ -435,7 +415,6 @@ public class MCReader {
         } else {
             error = true;
         }
-
         if (error) {
             mKeyMapStatus = 0;
             mKeyMap = null;
@@ -447,20 +426,16 @@ public class MCReader {
                                     String[] secondResult) {
         String[] ret = null;
         if (firstResult != null || secondResult != null) {
-            if ((firstResult != null && secondResult != null)
-                    && firstResult.length != secondResult.length) {
+            if ((firstResult != null && secondResult != null) && firstResult.length != secondResult.length) {
                 return null;
             }
-            int length  = (firstResult != null)
-                    ? firstResult.length : secondResult.length;
+            int length  = (firstResult != null) ? firstResult.length : secondResult.length;
             ArrayList<String> blocks = new ArrayList<>();
             // Merge data blocks.
             for (int i = 0; i < length -1 ; i++) {
-                if (firstResult != null && firstResult[i] != null
-                        && !firstResult[i].equals(NO_DATA)) {
+                if (firstResult != null && firstResult[i] != null && !firstResult[i].equals(NO_DATA)) {
                     blocks.add(firstResult[i]);
-                } else if (secondResult != null && secondResult[i] != null
-                        && !secondResult[i].equals(NO_DATA)) {
+                } else if (secondResult != null && secondResult[i] != null && !secondResult[i].equals(NO_DATA)) {
                     blocks.add(secondResult[i]);
                 } else {
                     // None of the results got the data form the block.
@@ -470,18 +445,14 @@ public class MCReader {
             ret = blocks.toArray(new String[blocks.size() + 1]);
             int last = length - 1;
             // Merge sector trailer.
-            if (firstResult != null && firstResult[last] != null
-                    && !firstResult[last].equals(NO_DATA)) {
+            if (firstResult != null && firstResult[last] != null && !firstResult[last].equals(NO_DATA)) {
                 // Take first for sector trailer.
                 ret[last] = firstResult[last];
-                if (secondResult != null && secondResult[last] != null
-                        && !secondResult[last].equals(NO_DATA)) {
+                if (secondResult != null && secondResult[last] != null && !secondResult[last].equals(NO_DATA)) {
                     // Merge key form second result to sector trailer.
-                    ret[last] = ret[last].substring(0, 20)
-                            + secondResult[last].substring(20);
+                    ret[last] = ret[last].substring(0, 20) + secondResult[last].substring(20);
                 }
-            } else if (secondResult != null && secondResult[last] != null
-                    && !secondResult[last].equals(NO_DATA)) {
+            } else if (secondResult != null && secondResult[last] != null && !secondResult[last].equals(NO_DATA)) {
                 // No first result. Take second result as sector trailer.
                 ret[last] = secondResult[last];
             } else {
@@ -491,11 +462,8 @@ public class MCReader {
         }
         return ret;
     }
-    public HashMap<Integer, HashMap<Integer, Integer>> isWritableOnPositions(
-            HashMap<Integer, int[]> pos,
-            SparseArray<byte[][]> keyMap) {
-        HashMap<Integer, HashMap<Integer, Integer>> ret =
-                new HashMap<>();
+    public HashMap<Integer, HashMap<Integer, Integer>> isWritableOnPositions(HashMap<Integer, int[]> pos, SparseArray<byte[][]> keyMap) {
+        HashMap<Integer, HashMap<Integer, Integer>> ret = new HashMap<>();
         for (int i = 0; i < keyMap.size(); i++) {
             int sector = keyMap.keyAt(i);
             if (pos.containsKey(sector)) {

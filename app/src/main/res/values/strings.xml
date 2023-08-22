@@ -6,11 +6,11 @@
     <string name="app_version">aplikasi widy</string>
 
     <string name="title_activity_main">NFC Reader dan Writer</string>
-    <string name="title_activity_read_tag">Read Tag</string>
+    <string name="title_activity_read_tag">Read Memory</string>
     <string name="title_activity_dump_editor">Dump Editor</string>
     <string name="title_activity_access_conditions">Access Conditions</string>
-    <string name="title_activity_write_tag">Write Tag</string>
-    <string name="title_activity_tulis_tag">Tulis Tag</string>
+    <string name="title_activity_write_tag">Tulis Tag (HEX)</string>
+    <string name="title_activity_tulis_tag">Tulis Tag (US - ASCII)</string>
     <string name="title_activity_create_key_map">Map Keys ke Sectors</string>
     <string name="title_activity_file_chooser">File Chooser</string>
     <string name="title_activity_value_blocks">Value Blocks as Integers</string>
@@ -184,9 +184,9 @@
     <string name="text_enter_file_name">Enter a file name</string>
 
     <!-- Actions (Buttons, Checkboxs, etc. -->
-    <string name="action_read_tag">Read Tag</string>
+    <string name="action_read_tag">MEMBACA MEMORY TAG</string>
     <string name="action_info_tag">Info Tag</string>
-    <string name="action_write_tag">Write Tag</string>
+    <string name="action_write_tag">Tulis Tag (HEX)</string>
     <string name="action_edit_tag_dump">Edit/Analyze Dump File</string>
     <string name="action_edit_key_dump">Edit/Add Key File</string>
     <string name="action_tools">Tools</string>
@@ -222,7 +222,7 @@
     <string name="action_more">Read More&#8230;</string>
     <string name="action_decode">Decode</string>
     <string name="action_encode">Encode</string>
-    <string name="action_wirte_block">Write Block</string>
+    <string name="action_wirte_block">Menulis</string>
     <string name="action_write_dump_clone">Write Dump (Clone)</string>
     <string name="action_write_dump">Write Dump</string>
     <string name="action_factory_format">Factory Format</string>

@@ -59,10 +59,8 @@ public class MainMenu extends Activity {
         TextView tv = findViewById(R.id.textViewMainFooter);
         tv.setText(getString(R.string.app_version) + ": " + Common.getVersionCode());
         if (savedInstanceState != null) {
-            mDonateDialogWasShown = savedInstanceState.getBoolean(
-                    "donate_dialog_was_shown");
-            mInfoExternalNfcDialogWasShown = savedInstanceState.getBoolean(
-                    "info_external_nfc_dialog_was_shown");
+            mDonateDialogWasShown = savedInstanceState.getBoolean("donate_dialog_was_shown");
+            mInfoExternalNfcDialogWasShown = savedInstanceState.getBoolean("info_external_nfc_dialog_was_shown");
             mHasNoNfc = savedInstanceState.getBoolean("has_no_nfc");
             mOldIntent = savedInstanceState.getParcelable("old_intent");
         }
@@ -82,8 +80,7 @@ public class MainMenu extends Activity {
         outState.putParcelable("old_intent", mOldIntent);
     }
     private void runStartUpNode(StartUpNode startUpNode) {
-        SharedPreferences sharedPref =
-                getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedEditor = sharedPref.edit();
         switch (startUpNode) {
             case FirstUseDialog:
@@ -151,8 +148,7 @@ public class MainMenu extends Activity {
                     useAsEditorOnly(false);
                     runStartUpNode(StartUpNode.DonateDialog);
                 } else {
-                    if (!Common.useAsEditorOnly()
-                            && !mInfoExternalNfcDialogWasShown) {
+                    if (!Common.useAsEditorOnly() && !mInfoExternalNfcDialogWasShown) {
                         createInfoExternalNfcServiceDialog().show();
                         mInfoExternalNfcDialogWasShown = true;
                     } else {
@@ -194,8 +190,7 @@ public class MainMenu extends Activity {
                             sharedEditor.putBoolean("is_first_run", false);
                             sharedEditor.apply();
                             runStartUpNode(StartUpNode.HasNfc);
-                        })
-                .create();
+                        }).create();
     }
     private AlertDialog createHasNoMifareClassicSupportDialog() {
         CharSequence styledText = HtmlCompat.fromHtml(getString(R.string.dialog_no_mfc_support_device), HtmlCompat.FROM_HTML_MODE_LEGACY);
@@ -217,8 +212,7 @@ public class MainMenu extends Activity {
                             useAsEditorOnly(true);
                             runStartUpNode(StartUpNode.DonateDialog);
                         })
-                .setNegativeButton(R.string.action_exit_app,
-                        (dialog, id) -> {
+                .setNegativeButton(R.string.action_exit_app, (dialog, id) -> {
                             finish();
                         })
                 .setOnCancelListener(dialog -> finish())
@@ -233,17 +227,14 @@ public class MainMenu extends Activity {
                         (dialog, which) -> {
                             startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
                         })
-                .setNeutralButton(R.string.action_editor_only,
-                        (dialog, which) -> {
+                .setNeutralButton(R.string.action_editor_only,(dialog, which) -> {
                             useAsEditorOnly(true);
                             runStartUpNode(StartUpNode.DonateDialog);
                         })
-                .setNegativeButton(R.string.action_exit_app,
-                        (dialog, id) -> {
+                .setNegativeButton(R.string.action_exit_app, (dialog, id) -> {
                             finish();
                         })
-                .setOnCancelListener(
-                        dialog -> finish())
+                .setOnCancelListener(dialog -> finish())
                 .create();
     }
     private AlertDialog createInstallExternalNfcDialog() {
@@ -262,8 +253,7 @@ public class MainMenu extends Activity {
                                         Uri.parse("https://play.google.com/store" + "/apps/details?id=eu.dedb.nfc" + ".service")));
                             }
                         })
-                .setNeutralButton(R.string.action_editor_only,
-                        (dialog, which) -> {
+                .setNeutralButton(R.string.action_editor_only, (dialog, which) -> {
                             useAsEditorOnly(true);
                             runStartUpNode(StartUpNode.DonateDialog);
                         })
@@ -271,8 +261,7 @@ public class MainMenu extends Activity {
                         (dialog, id) -> {
                             finish();
                         })
-                .setOnCancelListener(
-                        dialog -> finish())
+                .setOnCancelListener(dialog -> finish())
                 .create();
     }
     private AlertDialog createStartExternalNfcServiceDialog() {
@@ -295,8 +284,7 @@ public class MainMenu extends Activity {
                         (dialog, id) -> {
                             finish();
                         })
-                .setOnCancelListener(
-                        dialog -> finish())
+                .setOnCancelListener(dialog -> finish())
                 .create();
     }
     private AlertDialog createInfoExternalNfcServiceDialog() {
@@ -309,10 +297,8 @@ public class MainMenu extends Activity {
                         (dialog, which) -> {
                             runStartUpNode(StartUpNode.DonateDialog);
                         })
-                .setNeutralButton(R.string.action_start_external_nfc,
-                        (dialog, which) -> Common.openApp(context, "eu.dedb.nfc.service"))
-                .setNegativeButton(R.string.action_editor_only,
-                        (dialog, id) -> {
+                .setNeutralButton(R.string.action_start_external_nfc, (dialog, which) -> Common.openApp(context, "eu.dedb.nfc.service"))
+                .setNegativeButton(R.string.action_editor_only, (dialog, id) -> {
                             useAsEditorOnly(true);
                             runStartUpNode(StartUpNode.DonateDialog);
                         })
@@ -403,8 +389,7 @@ public class MainMenu extends Activity {
     }
     public void onOpenTagDumpEditor(View view) {
         File file = Common.getFile(Common.DUMPS_DIR);
-        if (file.isDirectory() && (file.listFiles() == null
-                || file.listFiles().length == 0)) {
+        if (file.isDirectory() && (file.listFiles() == null || file.listFiles().length == 0)) {
             Toast.makeText(this, R.string.info_no_dumps,
                     Toast.LENGTH_LONG).show();
         }

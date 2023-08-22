@@ -1130,18 +1130,13 @@ public class Common extends Application {
     }
     public static String getFromClipboard(Context context) {
         android.content.ClipboardManager clipboard =
-                (android.content.ClipboardManager)
-                        context.getSystemService(
-                                Context.CLIPBOARD_SERVICE);
+                (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboard.getPrimaryClip() != null
                 && clipboard.getPrimaryClip().getItemCount() > 0
-                && clipboard.getPrimaryClipDescription().hasMimeType(
-                android.content.ClipDescription.MIMETYPE_TEXT_PLAIN)
+                && clipboard.getPrimaryClipDescription().hasMimeType(android.content.ClipDescription.MIMETYPE_TEXT_PLAIN)
                 && clipboard.getPrimaryClip().getItemAt(0) != null
-                && clipboard.getPrimaryClip().getItemAt(0)
-                .getText() != null) {
-            return clipboard.getPrimaryClip().getItemAt(0)
-                    .getText().toString();
+                && clipboard.getPrimaryClip().getItemAt(0).getText() != null) {
+            return clipboard.getPrimaryClip().getItemAt(0).getText().toString();
         }
         return null;
     }
@@ -1153,18 +1148,15 @@ public class Common extends Application {
             uri = FileProvider.getUriForFile(context,
                     context.getPackageName() + ".fileprovider", file);
         } catch (IllegalArgumentException ex) {
-            Toast.makeText(context, R.string.info_share_error,
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.info_share_error, Toast.LENGTH_SHORT).show();
             return;
         }
         intent.setDataAndType(uri, "text/plain");
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        context.startActivity(Intent.createChooser(intent,
-                context.getText(R.string.dialog_share_title)));
+        context.startActivity(Intent.createChooser(intent, context.getText(R.string.dialog_share_title)));
     }
-    public static void copyFile(InputStream in, OutputStream out)
-            throws IOException {
+    public static void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
         while((read = in.read(buffer)) != -1){

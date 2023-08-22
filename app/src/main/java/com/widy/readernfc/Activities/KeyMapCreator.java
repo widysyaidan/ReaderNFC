@@ -35,18 +35,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class KeyMapCreator extends BasicActivity{
-    public final static String EXTRA_KEYS_DIR =
-            "com.widy.readernfc.Activity.KEYS_DIR";
-    public final static String EXTRA_SECTOR_CHOOSER =
-            "com.widy.readernfc.Activity.SECTOR_CHOOSER";
-    public final static String EXTRA_SECTOR_CHOOSER_FROM =
-            "com.widy.readernfc.Activity.SECTOR_CHOOSER_FROM";
-    public final static String EXTRA_SECTOR_CHOOSER_TO =
-            "com.widy.readernfc.Activity.SECTOR_CHOOSER_TO";
-    public final static String EXTRA_TITLE =
-            "com.widy.readernfc.Activity.TITLE";
-    public final static String EXTRA_BUTTON_TEXT =
-            "com.widy.readernfc.Activity.BUTTON_TEXT";
+    public final static String EXTRA_KEYS_DIR = "com.widy.readernfc.Activity.KEYS_DIR";
+    public final static String EXTRA_SECTOR_CHOOSER = "com.widy.readernfc.Activity.SECTOR_CHOOSER";
+    public final static String EXTRA_SECTOR_CHOOSER_FROM = "com.widy.readernfc.Activity.SECTOR_CHOOSER_FROM";
+    public final static String EXTRA_SECTOR_CHOOSER_TO = "com.widy.readernfc.Activity.SECTOR_CHOOSER_TO";
+    public final static String EXTRA_TITLE = "com.widy.readernfc.Activity.TITLE";
+    public final static String EXTRA_BUTTON_TEXT = "com.widy.readernfc.Activity.BUTTON_TEXT";
     public static final int MAX_SECTOR_COUNT = 40;
     public static final int MAX_BLOCK_COUNT_PER_SECTOR = 16;
     private static final String LOG_TAG = KeyMapCreator.class.getSimpleName();
@@ -73,10 +67,10 @@ public class KeyMapCreator extends BasicActivity{
         mCreateKeyMap = findViewById(R.id.buttonCreateKeyMap);
         mCancel = findViewById(R.id.buttonCreateKeyMapCancel);
         mSectorRange = findViewById(R.id.textViewCreateKeyMapFromTo);
-        mKeyFilesGroup = findViewById(
-                R.id.linearLayoutCreateKeyMapKeyFiles);
+        mKeyFilesGroup = findViewById(R.id.linearLayoutCreateKeyMapKeyFiles);
         mProgressBar = findViewById(R.id.progressBarCreateKeyMap);
         Intent intent = getIntent();
+
         if (intent.hasExtra(EXTRA_SECTOR_CHOOSER)) {
             Button changeSectorRange = findViewById(R.id.buttonCreateKeyMapChangeRange);
             boolean value = intent.getBooleanExtra(EXTRA_SECTOR_CHOOSER, true);
@@ -113,8 +107,7 @@ public class KeyMapCreator extends BasicActivity{
     @Override
     public void onPause() {
         super.onPause();
-        boolean autoReconnect = Common.getPreferences().getBoolean(
-                Preference.AutoReconnect.toString(), false);
+        boolean autoReconnect = Common.getPreferences().getBoolean(Preference.AutoReconnect.toString(), false);
         if (!autoReconnect) {
             mIsCreatingKeyMap = false;
         }
@@ -146,11 +139,9 @@ public class KeyMapCreator extends BasicActivity{
         ArrayList<String> selectedFiles = null;
         if (selectLastUsedKeyFiles) {
             SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-            String selectedFilesChain = sharedPref.getString(
-                    "last_used_key_files", null);
+            String selectedFilesChain = sharedPref.getString("last_used_key_files", null);
             if (selectedFilesChain != null) {
-                selectedFiles = new ArrayList<>(
-                        Arrays.asList(selectedFilesChain.split("/")));
+                selectedFiles = new ArrayList<>(Arrays.asList(selectedFilesChain.split("/")));
             }
         }
         mKeyFilesGroup.removeAllViews();
@@ -190,8 +181,7 @@ public class KeyMapCreator extends BasicActivity{
         }
     }
     public void onCreateKeyMap(View view) {
-        boolean saveLastUsedKeyFiles = Common.getPreferences().getBoolean(
-                Preference.SaveLastUsedKeyFiles.toString(), true);
+        boolean saveLastUsedKeyFiles = Common.getPreferences().getBoolean(Preference.SaveLastUsedKeyFiles.toString(), true);
         StringBuilder lastSelectedKeyFiles = new StringBuilder();
         ArrayList<String> fileNames = new ArrayList<>();
         for (int i = 0; i < mKeyFilesGroup.getChildCount(); i++) {
@@ -240,8 +230,7 @@ public class KeyMapCreator extends BasicActivity{
                     mFirstSector = Integer.parseInt(fromAndTo[0]);
                     mLastSector = Integer.parseInt(fromAndTo[2]);
                 }
-                if (!reader.setMappingRange(
-                        mFirstSector, mLastSector)) {
+                if (!reader.setMappingRange(mFirstSector, mLastSector)) {
                     Toast.makeText(this, R.string.info_mapping_sector_out_of_range, Toast.LENGTH_LONG).show();
                     reader.close();
                     return;
@@ -285,8 +274,7 @@ public class KeyMapCreator extends BasicActivity{
                     Common.setKeyMap(null);
                     Common.setKeyMapRange(-1, -1);
                     mCancel.setEnabled(true);
-                    Toast.makeText(context, R.string.info_key_map_error,
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.info_key_map_error, Toast.LENGTH_LONG).show();
                 } else {
                     Common.setKeyMap(null);
                     Common.setKeyMapRange(-1, -1);
@@ -359,8 +347,7 @@ public class KeyMapCreator extends BasicActivity{
                 .setTitle(R.string.dialog_mapping_range_title)
                 .setMessage(R.string.dialog_mapping_range)
                 .setView(llv)
-                .setPositiveButton(R.string.action_ok,
-                        (dialog, whichButton) -> {
+                .setPositiveButton(R.string.action_ok, (dialog, whichButton) -> {
                             String txtFrom = "" + DEFAULT_SECTOR_RANGE_FROM;
                             String txtTo = "" + DEFAULT_SECTOR_RANGE_TO;
                             boolean noFrom = false;
@@ -391,15 +378,13 @@ public class KeyMapCreator extends BasicActivity{
                                 }
                             }
                         })
-                .setNeutralButton(R.string.action_read_all_sectors,
-                        (dialog, whichButton) -> {
+                .setNeutralButton(R.string.action_read_all_sectors, (dialog, whichButton) -> {
                             mSectorRange.setText(getString(R.string.text_sector_range_all));
                             if (saveAsDefault.isChecked()) {
                                 saveMappingRange("", "");
                             }
                         })
-                .setNegativeButton(R.string.action_cancel,
-                        (dialog, whichButton) -> {}).show();
+                .setNegativeButton(R.string.action_cancel, (dialog, whichButton) -> {}).show();
     }
     private void saveMappingRange(String from, String to) {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);

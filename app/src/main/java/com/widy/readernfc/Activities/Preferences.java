@@ -167,8 +167,7 @@ public class Preferences extends BasicActivity{
         int customSectorCount = 16;
         if (mUseCustomSectorCount.isChecked()) {
             try {
-                customSectorCount = Integer.parseInt(
-                        mCustomSectorCount.getText().toString());
+                customSectorCount = Integer.parseInt(mCustomSectorCount.getText().toString());
             } catch (NumberFormatException ex) {
                 error = true;
             }

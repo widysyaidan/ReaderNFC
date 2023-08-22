@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.widy.readernfc.Common;
-
 public abstract class BasicActivity extends Activity {
     @Override
     public void onResume() {
