@@ -500,8 +500,7 @@ public class MCReader {
                     ret.put(sector, null);
                     continue;
                 }
-                boolean isKeyBReadable = Common.isKeyBReadable(
-                        acMatrix[0][3], acMatrix[1][3], acMatrix[2][3]);
+                boolean isKeyBReadable = Common.isKeyBReadable(acMatrix[0][3], acMatrix[1][3], acMatrix[2][3]);
                 // Check all Blocks with data (!= null).
                 HashMap<Integer, Integer> blockWithWriteInfo =
                         new HashMap<>();
@@ -548,13 +547,11 @@ public class MCReader {
                                 acBitsForBlock = 2;
                             }
                         }
-                        blockWithWriteInfo.put(
-                                block, Common.getOperationRequirements(
+                        blockWithWriteInfo.put(block, Common.getOperationRequirements(
                                         acMatrix[0][acBitsForBlock],
                                         acMatrix[1][acBitsForBlock],
                                         acMatrix[2][acBitsForBlock],
-                                        Operation.Write,
-                                        false, isKeyBReadable));
+                                        Operation.Write, false, isKeyBReadable));
                     }
                 }
                 if (blockWithWriteInfo.size() > 0) {
@@ -579,8 +576,7 @@ public class MCReader {
                             keys.add(line);
                         } catch (OutOfMemoryError e) {
                             // Error. Too many keys (out of memory).
-                            Toast.makeText(context, R.string.info_to_many_keys,
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.info_to_many_keys, Toast.LENGTH_LONG).show();
                             return -1;
                         }
                     }
@@ -599,8 +595,7 @@ public class MCReader {
         return 0;
     }
     public boolean setMappingRange(int firstSector, int lastSector) {
-        if (firstSector >= 0 && lastSector < getSectorCount()
-                && firstSector <= lastSector) {
+        if (firstSector >= 0 && lastSector < getSectorCount() && firstSector <= lastSector) {
             mFirstSector = firstSector;
             mLastSector = lastSector;
             // Init. status of buildNextKeyMapPart to create a new key map.
@@ -661,11 +656,9 @@ public class MCReader {
         return mMFC.getSize();
     }
     public int getSectorCount() {
-        boolean useCustomSectorCount = Common.getPreferences().getBoolean(
-                Preference.UseCustomSectorCount.toString(), false);
+        boolean useCustomSectorCount = Common.getPreferences().getBoolean(Preference.UseCustomSectorCount.toString(), false);
         if (useCustomSectorCount) {
-            return Common.getPreferences().getInt(
-                    Preference.CustomSectorCount.toString(), 16);
+            return Common.getPreferences().getInt(Preference.CustomSectorCount.toString(), 16);
         }
         return mMFC.getSectorCount();
     }
@@ -677,8 +670,7 @@ public class MCReader {
     }
     public static int blockToSector(int blockIndex) {
         if (blockIndex < 0 || blockIndex >= 256) {
-            throw new IndexOutOfBoundsException(
-                    "Block out of bounds: " + blockIndex);
+            throw new IndexOutOfBoundsException("Block out of bounds: " + blockIndex);
         }
         if (blockIndex < 32 * 4) {
             return blockIndex / 4;
