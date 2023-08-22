@@ -7,10 +7,12 @@
     android:background="@color/white"
     tools:context="Activities.MainMenu" >
 
+
         <LinearLayout
             android:id="@+id/linearLayoutMainMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -19,7 +21,7 @@
             <LinearLayout
                 android:id="@+id/linearLayoutMainMenuRow1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/buttonMainReadTag"
@@ -28,6 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
                     android:onClick="onShowReadTag"
                     android:text="@string/action_read_tag" />
 
@@ -44,6 +48,8 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
                     android:onClick="onShowInfoTag"
                     android:text="@string/action_info_tag"
                     android:layout_weight="0.5" />
@@ -59,11 +65,12 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="@color/blue"
                     android:onClick="onShowWriteTag"
                     android:text="@string/action_write_tag" />
-
 
             </LinearLayout>
             <LinearLayout
@@ -73,6 +80,8 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
                     android:layout_weight="0.5"
                     android:backgroundTint="@color/blue"
                     android:onClick="onShowTulisTag"
