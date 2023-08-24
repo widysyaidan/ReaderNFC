@@ -7,90 +7,112 @@
     android:background="@color/white"
     tools:context="Activities.MainMenu" >
 
+    <LinearLayout
+        android:id="@+id/linearLayoutMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0.5"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
 
         <LinearLayout
-            android:id="@+id/linearLayoutMainMenu"
+            android:id="@+id/linearLayoutMainMenuRow1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
+            android:layout_height="wrap_content" >
 
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/memory"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
 
+            <Button
+                android:id="@+id/buttonMainReadTag"
+                style="?android:attr/buttonStyleSmall"
+                android:backgroundTint="@color/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:onClick="onShowReadTag"
+                android:text="@string/action_read_tag" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutMainMenuRow1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/buttonMainReadTag"
-                    style="?android:attr/buttonStyleSmall"
-                    android:backgroundTint="@color/blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:onClick="onShowReadTag"
-                    android:text="@string/action_read_tag" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutMainMenuRow2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Button
-                    android:id="@+id/buttonMainInfoTag"
-                    android:backgroundTint="@color/blue"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:onClick="onShowInfoTag"
-                    android:text="@string/action_info_tag"
-                    android:layout_weight="0.5" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linearLayoutMainMenuRow3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Button
-                    android:id="@+id/buttonMainWriteTag"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="@color/blue"
-                    android:onClick="onShowWriteTag"
-                    android:text="@string/action_write_tag" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linearLayoutMainMenuRow4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:layout_weight="0.5"
-                    android:backgroundTint="@color/blue"
-                    android:onClick="onShowTulisTag"
-                    android:text="@string/title_activity_tulis_tag"/>
-            </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayoutMainMenuRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/infotag"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+            <Button
+                android:id="@+id/buttonMainInfoTag"
+                android:backgroundTint="@color/blue"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="onShowInfoTag"
+                android:text="@string/action_info_tag"
+                android:layout_weight="0.5" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayoutMainMenuRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/hex"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+            <Button
+                android:id="@+id/buttonMainWriteTag"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/blue"
+                android:onClick="onShowWriteTag"
+                android:text="@string/action_write_tag" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayoutMainMenuRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ascii"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/blue"
+                android:onClick="onShowTulisTag"
+                android:text="@string/title_activity_tulis_tag"/>
+        </LinearLayout>
+    </LinearLayout>
     <TextView
         android:id="@+id/textViewMainFooter"
         android:layout_width="wrap_content"

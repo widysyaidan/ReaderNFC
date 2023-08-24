@@ -304,25 +304,11 @@ public class InfoTag extends Activity {
                         type = "Ultralight C";
                         break;
                 }
-                sb.append('\n');
                 sb.append("Mifare Ultralight type: ");
                 sb.append(type);
                 sb.append('\n');
 
-                sb.append('\n');
-                sb.append("Mifare Ultralight Max Transceive Length: ");
-                sb.append(mifareUlTag.getMaxTransceiveLength());
-                sb.append('\n');
 
-                sb.append('\n');
-                sb.append("Mifare Ultralight Class: ");
-                sb.append(mifareUlTag.getClass());
-                sb.append('\n');
-
-                sb.append('\n');
-                sb.append("Mifare Ultralight Timeout: ");
-                sb.append(mifareUlTag.getTimeout());
-                sb.append('\n');
 
             }
         }
